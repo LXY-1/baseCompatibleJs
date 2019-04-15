@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="浏览器api兼容代码">
+    <title>测试</title>
+</head>
+<body>
+    
+    <div class="wrap mg" id='wrap'>
+        <ul class="nav-wrap mg" id="nav-wrap">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="btn-wrap" id=btn-wrap>
+            <button class="a-event">添加事件</button>
+            <button class="remove-event">移除事件</button>
+            <button class="get-dom1">根据id获取dom</button>
+            <button class="get-dom2">根据class获取dom</button>
+            <button class="get-dom3">根据tagName获取dom</button>
+        </div>
+        <p class="info"></p>
+    </div>
+
+    <script src="./baseJs.js"></script>
+    <script>
+        var b1 = baseJs.domOperate.getDom('body .a-event');
+        var b2 = baseJs.domOperate.getDom('body .remove-event');
+        var b3 = baseJs.domOperate.getDom('body .get-dom1');
+        var b4 = baseJs.domOperate.getDom('body .get-dom2');
+        var b5 = baseJs.domOperate.getDom('body .get-dom3');
+        var infoWrap = baseJs.domOperate.getDom('body .info');
+        
+        baseJs.eventUtil.addHandler(b1,'click',event1)
+        baseJs.eventUtil.addHandler(b2,'click',function(){
+            baseJs.eventUtil.removeHandler(b1,'click',event1);
+            infoWrap.innerText = '按钮1点击事件被移除'
+        })
+        baseJs.eventUtil.addHandler(b3,'click',function(){
+            infoWrap.innerText = `根据id：wrap 获取到div元素:${baseJs.domOperate.getDom('#wrap')}`
+        })
+        baseJs.eventUtil.addHandler(b4,'click',function(){
+            infoWrap.innerText = `根据class:nav-wrap 获取到ul元素:${baseJs.domOperate.getDom('.nav-wrap')}`
+        })
+        baseJs.eventUtil.addHandler(b5,'click',function(){
+            infoWrap.innerText = `根据tagName:p 获取到p元素:${baseJs.domOperate.getDom('p')}`
+        })
+        function event1(){
+            infoWrap.innerText = '按钮1添加了点击事件'
+        }
+        console.log(b1);
+        
+    </script>
+</body>
+</html>
